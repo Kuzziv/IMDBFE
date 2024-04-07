@@ -1,0 +1,17 @@
+# Ignore node_modules directory
+node_modules/
+
+# Ignore build artifacts
+/dist/
+
+# Ignore editor-specific files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+
+# Ignore environment-specific files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
