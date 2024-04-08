@@ -22,10 +22,15 @@
       <button @click="getAllMovies">Get All Movies</button>
     </div>
 
+    <!-- Create Movie -->
+    <div>
+      <button @click="goToCreateForm">Create Movie</button>
+    </div>
+
     <!-- Pagination controls -->
     <div>
       <button @click="goToPreviousPage" :disabled="currentPage === 1 || !paginationEnabled">Previous Page</button>
-      <button @click="goToNextPage" :disabled="currentPage * pageSize >= totalMovies || !paginationEnabled">Next Page</button>
+      <button @click="goToNextPage" :disabled="!paginationEnabled">Next Page</button>
       <span>{{ currentPage }}</span>
       <button @click="resetPage">Reset Page</button>
     </div>
@@ -53,7 +58,6 @@ export default {
       allMovies: [],
       currentPage: 1,
       pageSize: 20,
-      totalMovies: 100000,
       searchTitle: '',
       searchTconst: '',
       paginationEnabled: false // Flag to indicate whether pagination is enabled
@@ -110,6 +114,9 @@ export default {
     },
     async resetPage() {
       this.currentPage = 1;
+    },
+    goToCreateForm() {
+      this.$router.push('/movie/create');
     }
   }
 }

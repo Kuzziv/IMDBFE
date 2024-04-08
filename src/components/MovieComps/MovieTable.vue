@@ -29,7 +29,7 @@
           <td>{{ movie.genreNames.join(', ') }}</td>
           <td>
             <!-- Example actions: edit and delete -->
-            <button @click="updateMovie(movie)">Update</button>
+            <button @click="goToUpdateForm(movie)">Update</button>
             <button @click="deleteMovie(movie)">Delete</button>
           </td>
         </tr>
@@ -39,6 +39,9 @@
 </template>
 
 <script>
+import { router } from '@/router/index.js'; 
+import apiClient from '@/service/api.js';
+
 export default {
   props: {
     movies: {
@@ -47,13 +50,16 @@ export default {
     }
   },
   methods: {
-    updateMovie(movie) {
-      // Implement edit functionality
-      console.log('Update movie:', movie);
+    async deleteMovie(movie) {
+      try {
+        const response = await apiClient.delete(`/movie/${movie.tconst}`);
+        console.log('Response:', response.data); 
+      } catch (error) {
+        console.error('Error deleting movie:', error);
+      }
     },
-    deleteMovie(movie) {
-      // Implement delete functionality
-      console.log('Deleting movie:', movie);
+    goToUpdateForm(movie) {
+      router.push({ name: 'UpdateMovie', params: { tconst: movie.tconst } });
     }
   }
 }
